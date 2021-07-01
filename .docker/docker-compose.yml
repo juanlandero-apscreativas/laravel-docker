@@ -1,0 +1,59 @@
+version: "3.7"
+
+services:
+  mariadb:
+    image: mariadb:10.5.9
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb/datamysql:/var/lib/mysql
+    networks:
+      - laravel-devkit
+    domainname: mariadb
+    hostname: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_USER: laravel
+    restart: always
+  cli:
+    build: cli
+    volumes:
+      - ./../:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ~/.ssh/known_hosts:/root/.ssh/known_hosts
+      - ${SSH_AUTH_SOCK}:/ssh-auth.sock
+    user: www-data
+    working_dir: /var/www/html
+    networks:
+      - laravel-devkit
+    env_file:
+      - ./.env
+  http:
+    build: http
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./../:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./http/conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    networks:
+      laravel-devkit:
+        aliases:
+          - laravel.local
+    env_file:
+      - ./.env
+  node:
+    build : nodejs
+    ports: 
+      - "8090:8080"
+    volumes:
+      - ./../:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - laravel-devkit
+networks:
+  laravel-devkit:
+    driver: bridge
