@@ -24,7 +24,7 @@ services:
       - ./php/php.ini:/usr/local/etc/php/php.ini
       - ~/.ssh/known_hosts:/root/.ssh/known_hosts
       - ${SSH_AUTH_SOCK}:/ssh-auth.sock
-    user: www-data
+    user: 1000:1000
     working_dir: /var/www/html
     networks:
       - laravel-devkit
@@ -39,6 +39,7 @@ services:
       - ./../:/var/www/html
       - ./php/php.ini:/usr/local/etc/php/php.ini
       - ./http/conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    user: 1000:1000
     networks:
       laravel-devkit:
         aliases:
