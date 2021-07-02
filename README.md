@@ -3,7 +3,7 @@
 
 ## Información 
 
-Este es un Dockerizado de Laravel + Apache + MariaDB , el cual esta listo para poder lanzar un proyecto iniciarl en Laravel 8.37
+Este es un Dockerizado de Laravel + Apache + MariaDB , el cual esta listo para poder lanzar un proyecto iniciar en Laravel 8.49
 El Stack esta definido de la siguiente manera :  PHP 7.3 // MariaDB 10.5.9 // Apache 2
 
 ## Requerimientos
@@ -16,7 +16,7 @@ El Stack esta definido de la siguiente manera :  PHP 7.3 // MariaDB 10.5.9 // Ap
 
 Debemos de descargar nuestro proyecto en la carpeta que deseemos instalarla : 
 
-    $ git clone https://github.com/apscreativas/laravel8-docker.git
+    $ git clone https://github.com/apscreativas/laravel-docker.git
 
 Todo nuestro código para la creación de Contenedores se encuentra en la carpeta .docker de este proyecto, así pues debemos de entrar a la misma
 
